@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using WebApplication2.Data;
+using WebApplication2.Models;
 using WebApplication2.Models.Interfaces;
 using WebApplication2.Models.Services;
 
@@ -17,7 +19,7 @@ builder.Services.AddControllersWithViews();
 if (builder.Environment.IsDevelopment())
 {
     builder.Services.AddDbContext<TestDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("AzureContext")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("TestDbContext")));
 } else
 {
     builder.Services.AddDbContext<TestDbContext>(options =>
@@ -53,6 +55,12 @@ builder.Services.AddSwaggerDocument(config =>
     };
 });
 
+//builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+//{
+//    options.User.RequireUniqueEmail = true;
+//    // There are other options like this
+//}).AddEntityFrameworkStores<TestDbContext>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -69,6 +77,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+//app.UseAuthentication();
+
 
 app.MapControllerRoute(
     name: "default",

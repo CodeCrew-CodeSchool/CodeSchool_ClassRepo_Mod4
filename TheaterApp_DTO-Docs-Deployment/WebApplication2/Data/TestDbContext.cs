@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using WebApplication2.Models;
+using WebApplication2.Models.DTO;
 
 namespace WebApplication2.Data
 {
@@ -13,6 +14,7 @@ namespace WebApplication2.Data
 		public DbSet<Show> Shows { get; set; }
 		public DbSet<Venue> Venues { get; set; }
 
+        public DbSet<ApplicationUser> Users { get; set; }
 		public TestDbContext(DbContextOptions options) : base(options)
         {
 
@@ -41,6 +43,8 @@ namespace WebApplication2.Data
             //    c.OwnsOne(s => s.Show).HasData(s);
             //});
         }
+
+        public DbSet<WebApplication2.Models.DTO.UserDto> UserDto { get; set; }
        
     }
 }
