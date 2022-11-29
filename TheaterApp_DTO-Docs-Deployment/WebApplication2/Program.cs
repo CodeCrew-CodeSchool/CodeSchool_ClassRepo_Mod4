@@ -26,6 +26,7 @@ if (builder.Environment.IsDevelopment())
     options.UseSqlServer(builder.Configuration.GetConnectionString("AzureContext")));
 }
 builder.Services.AddTransient<ICast, CastService>();
+builder.Services.AddTransient<IUser, UserService>();
 //AddDbContext - TestDbContext  |  SQLiteContext
 
 /*
@@ -55,11 +56,12 @@ builder.Services.AddSwaggerDocument(config =>
     };
 });
 
-//builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-//{
-//    options.User.RequireUniqueEmail = true;
-//    // There are other options like this
-//}).AddEntityFrameworkStores<TestDbContext>();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+{
+    options.User.RequireUniqueEmail = true;
+    options.SignIn.RequireConfirmedAccount = true;
+    // There are other options like this
+}).AddEntityFrameworkStores<TestDbContext>();
 
 var app = builder.Build();
 
@@ -76,8 +78,9 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication(); 
 app.UseAuthorization();
-//app.UseAuthentication();
+
 
 
 app.MapControllerRoute(

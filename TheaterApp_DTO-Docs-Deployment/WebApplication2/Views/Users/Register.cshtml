@@ -3,9 +3,11 @@
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
-<form>
+<form name="RegisterForm" id="RegisterForm">
+    @*method="post" asp-route="/Users/Register"*@
     @Html.DisplayNameFor(model => model.Username)
     @Html.TextBoxFor(model => model.Username)
+    @*@Html.TextBoxFor(model => model.Username, new {@title="Username", @placeholder="usrn@m3"})*@
 
     @Html.DisplayNameFor(model => model.Email)
     @Html.TextBoxFor(model => model.Email)
@@ -15,8 +17,9 @@
 
     @Html.DisplayNameFor(model => model.PhoneNumber)
     @Html.TextBoxFor(model => model.PhoneNumber)
+    
 	@*<input id="email" type="email" />
     <input id="pswd" type="password" />
     <input id="phn" type="tel"/>*@
-    <button type="submit" href="">Register Account</button>
+    <button type="button" onclick="Register()">Register Account</button>
 </form>

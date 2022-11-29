@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using WebApplication2.Data;
 using WebApplication2.Models;
 using WebApplication2.Models.DTO;
+using WebApplication2.Models.Interfaces;
 
 namespace WebApplication2.Controllers.API
 {
@@ -16,18 +17,21 @@ namespace WebApplication2.Controllers.API
     public class UsersController : ControllerBase
     {
         private readonly TestDbContext _context;
-
+        private IUser _user;
         public UsersController(TestDbContext context)
         {
             _context = context;
         }
-
+        public UsersController(IUser context)
+        {
+            _user = context;
+        }
         [HttpPost("Register")]
         public async Task<ActionResult<UserDto>> Register(RegisterUserDTO data)
         {
             //Note: data (RegisterUser) comes from an inbound DTO/Model created for this purpose
             //this.ModelState ? This comes from MVC Binding and shares an interface with the Model
-            var user = await ApplicationUser.Register(data, this.ModelState);
+            var user = await _user.Register(data, this.ModelState);
             if (ModelState.IsValid)
             {
                 return user;
@@ -39,7 +43,7 @@ namespace WebApplication2.Controllers.API
         [HttpPost("Login")]
         public async Task<ActionResult<UserDto>> Login(LoginDTO data)
         {
-            var user = await ApplicationUser.Authenticate(data.Username, data.Password);
+            var user = await _user.Authenticate(data.Username, data.Password);
 
             if (user == null)
             {

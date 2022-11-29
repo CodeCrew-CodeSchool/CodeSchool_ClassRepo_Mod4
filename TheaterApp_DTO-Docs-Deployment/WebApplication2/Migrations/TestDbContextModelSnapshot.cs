@@ -71,7 +71,7 @@ namespace WebApplication2.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("WebApplication2.Models.Cast", b =>
@@ -107,7 +107,7 @@ namespace WebApplication2.Migrations
                     b.HasIndex("ShowId")
                         .IsUnique();
 
-                    b.ToTable("Casts");
+                    b.ToTable("Casts", (string)null);
                 });
 
             modelBuilder.Entity("WebApplication2.Models.DTO.UserDto", b =>
@@ -121,7 +121,7 @@ namespace WebApplication2.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserDto");
+                    b.ToTable("UserDto", (string)null);
                 });
 
             modelBuilder.Entity("WebApplication2.Models.Person", b =>
@@ -138,7 +138,7 @@ namespace WebApplication2.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("People");
+                    b.ToTable("People", (string)null);
                 });
 
             modelBuilder.Entity("WebApplication2.Models.Show", b =>
@@ -160,7 +160,7 @@ namespace WebApplication2.Migrations
 
                     b.HasIndex("VenueId");
 
-                    b.ToTable("Shows");
+                    b.ToTable("Shows", (string)null);
                 });
 
             modelBuilder.Entity("WebApplication2.Models.Venue", b =>
@@ -177,7 +177,7 @@ namespace WebApplication2.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Venues");
+                    b.ToTable("Venues", (string)null);
                 });
 
             modelBuilder.Entity("WebApplication2.Models.Cast", b =>
