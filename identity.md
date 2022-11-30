@@ -227,6 +227,7 @@ How can we modify this entire process to be more user friendly?
       }
       ```
 
+
   - Add another fake user to see that the below DTO is being returned right
 - For errors, we're going to use a feature of EF called a ModelStateDictionary
   - This allows us to create any number of key/value pairs to indicate the state of the data model.
